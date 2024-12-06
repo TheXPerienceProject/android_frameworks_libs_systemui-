@@ -16,8 +16,6 @@
 
 package com.android.launcher3.icons;
 
-import static com.android.launcher3.util.override.MainThreadInitializedObject.forOverride;
-
 import static android.content.Intent.ACTION_DATE_CHANGED;
 import static android.content.Intent.ACTION_TIMEZONE_CHANGED;
 import static android.content.Intent.ACTION_TIME_CHANGED;
@@ -54,16 +52,13 @@ import androidx.core.os.BuildCompat;
 
 import com.android.launcher3.util.SafeCloseable;
 
-import com.android.launcher3.util.override.MainThreadInitializedObject;
-import com.android.launcher3.util.override.ResourceBasedOverride;
-
 import java.util.Calendar;
 import java.util.function.Supplier;
 
 /**
  * Class to handle icon loading from different packages
  */
-public class IconProvider implements ResourceBasedOverride {
+public class IconProvider {
 
     private final String ACTION_OVERLAY_CHANGED = "android.intent.action.OVERLAY_CHANGED";
     static final int CONFIG_ICON_MASK_RES_ID = Resources.getSystem().getIdentifier(
@@ -80,9 +75,6 @@ public class IconProvider implements ResourceBasedOverride {
     protected final Context mContext;
     private final ComponentName mCalendar;
     private final ComponentName mClock;
-
-    public static MainThreadInitializedObject<IconProvider> INSTANCE =
-            forOverride(IconProvider.class, R.string.icon_provider_class);
 
     public IconProvider(Context context) {
         mContext = context;
